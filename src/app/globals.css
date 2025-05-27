@@ -1,26 +1,130 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* --- Root Variables for Theme --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Light Mode */
+  --color-page-bg: #f8f6f2;        
+  --color-text-main: #4B423B;       
+  --color-text-secondary: #786A5F; 
+  --color-text-accent: #b08d57;     
+  
+  /* Button Swapped: Decline is prominent (darker bg), Accept is softer (lighter/transparent bg) */
+  --color-button-bg: #5a6352; /* Prominent BG (Decline) */
+  --color-button-text: #fdfcf8; /* Text for Prominent */
+  --color-button-hover-bg: #4a5043; /* Prominent Hover */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-button-secondary-bg: rgba(255, 255, 255, 0.15); /* Subtle BG (Accept) */
+  --color-button-secondary-text: var(--color-text-on-glass); /* Text for Subtle */
+  --color-button-secondary-hover-bg: rgba(255, 255, 255, 0.3);/* Subtle Hover */
+  
+  --color-form-bg: rgba(30, 30, 30, 0.65); /* Darker Glass form BG for better contrast with light text */
+  --color-text-on-glass: #f0f2f0;     
+  --color-card-bg: #ffffff; /* Background for the image "frame" */
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root { /* Define dark mode equivalents */
+    --color-page-bg: #2d2825;
+    --color-text-main: #e0d5c9;
+    --color-text-secondary: #b8ab9f;
+    --color-text-accent: #c8aa80;
+    --color-button-bg: #7a8372;      
+    --color-button-text: #221e1c;     
+    --color-button-hover-bg: #6a7062; 
+    --color-button-secondary-bg: rgba(200, 180, 170, 0.08); 
+    --color-button-secondary-text: var(--color-text-main);   
+    --color-button-secondary-hover-bg: rgba(200, 180, 170, 0.15);
+    --color-form-bg: rgba(10, 10, 10, 0.75);
+    --color-text-on-glass: #e0e8e0;
   }
 }
 
+/* --- Global Body Styles --- */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text-main);
+  background-color: var(--color-page-bg);
+  font-family: var(--font-gayathri), sans-serif; /* Gayathri as default */
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.65; 
+}
+
+/* --- Loader --- */
+.loader {
+  border: 3px solid var(--color-text-accent); 
+  border-top-color: transparent; 
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Glassmorphic RSVP form box styling --- */
+.glass-form-box {
+  background: var(--color-form-bg); 
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  border-radius: 1rem; 
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Even more subtle border */
+  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.25); 
+  color: var(--color-text-on-glass); 
+}
+
+/* --- Base Button Styling for RSVP choices --- */
+.rsvp-button-base {
+  padding: 0.8rem 1.25rem; 
+  font-size: 1rem;   
+  font-weight: 700;   
+  border-radius: 0.625rem; 
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  border: 1px solid transparent; 
+  line-height: 1.25; 
+}
+.rsvp-button-base:disabled { /* Styles for when buttons are submitting */
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important; 
+  box-shadow: none !important;
+}
+.rsvp-button-base:not(:disabled):hover {
+  transform: translateY(-2px) scale(1.02); 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.rsvp-button-base:not(:disabled):active {
+  transform: translateY(0px) scale(0.99);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+/* --- Page Content Container (for horizontal centering of content blocks if not done by flex on parent) --- */
+.page-content-container {
+  width: 100%;
+  /* max-width typically handled by child elements like the RSVP box or image frame */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem; 
+  padding-right: 1rem;
+}
+@media (min-width: 640px) { /* sm */
+  .page-content-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Custom Focus Ring for better accessibility and theme match */
+*:focus-visible {
+  outline: 2px solid var(--color-text-accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-text-accent) 20%, transparent);
+}
+/* Remove default outline for mouse users if only keyboard focus ring is desired */
+*:focus:not(:focus-visible) {
+  outline: none;
 }
