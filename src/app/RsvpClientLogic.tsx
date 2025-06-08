@@ -119,7 +119,7 @@ export function RsvpClientLogic({}: RsvpClientLogicProps) {
               Hello <span className="font-bold text-white">{guestData.name}</span>,
             </motion.p>
             <motion.p variants={itemVariants} className="text-lg md:text-xl opacity-80">
-              We have joyfully reserved <strong className="font-bold text-white">{guestData.headCount}</strong> seat{guestData.headCount > 1 ? 's' : ''} in your honour.
+              We have joyfully reserved <strong className="font-bold text-white"><span className="seat-highlight">{guestData.headCount}</span></strong> seat{guestData.headCount > 1 ? 's' : ''} in your honour.
             </motion.p>
             <motion.p variants={itemVariants} className="text-xl md:text-2xl font-bold mt-3 mb-2">
               Will you be joining us?

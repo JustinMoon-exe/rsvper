@@ -377,3 +377,8 @@ label {
 ::-webkit-scrollbar-track {
   background: var(--color-bg);
 }
+
+.seat-highlight {
+  color: var(--color-primary);
+  font-weight: 700;
+}
