@@ -1,9 +1,8 @@
 // src/app/page.tsx
 'use client';
 
-import { Suspense } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { RsvpClientLogic } from './RsvpClientLogic';
 
@@ -21,13 +20,21 @@ function LoadingSkeleton() {
 export default function RsvpPageContainer() {
   const { scrollY } = useScroll();
 
+  // SSR-safe viewport height
+  const [viewportHeight, setViewportHeight] = useState(800);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setViewportHeight(window.innerHeight);
+    }
+  }, []);
+
   // Scroll-based blur/darkening for the image
-  const imageBlur = useTransform(scrollY, [window.innerHeight / 2, window.innerHeight], [0, 12], { clamp: true });
-  const imageBrightness = useTransform(scrollY, [window.innerHeight / 2, window.innerHeight], [1, 0.3], { clamp: true });
+  const imageBlur = useTransform(scrollY, [viewportHeight / 2, viewportHeight], [0, 12], { clamp: true });
+  const imageBrightness = useTransform(scrollY, [viewportHeight / 2, viewportHeight], [1, 0.3], { clamp: true });
 
   // RSVP card fade-in and slide-up
-  const rsvpBoxOpacity = useTransform(scrollY, [window.innerHeight / 2, window.innerHeight], [0, 1], { clamp: true });
-  const rsvpBoxY = useTransform(scrollY, [window.innerHeight / 2, window.innerHeight], [50, 0], { clamp: true });
+  const rsvpBoxOpacity = useTransform(scrollY, [viewportHeight / 2, viewportHeight], [0, 1], { clamp: true });
+  const rsvpBoxY = useTransform(scrollY, [viewportHeight / 2, viewportHeight], [50, 0], { clamp: true });
 
   // Update the filter values on scroll for the image
   useEffect(() => {

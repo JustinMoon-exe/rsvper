@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface GuestData { name: string; headCount: number; }
 interface RsvpResponse { status: string; message?: string; }
 
-interface RsvpClientLogicProps {}
+type RsvpClientLogicProps = object;
 
 export function RsvpClientLogic({}: RsvpClientLogicProps) { 
   const guestParam = useSearchParams().get('guest');
@@ -35,7 +35,7 @@ export function RsvpClientLogic({}: RsvpClientLogicProps) {
         const data: GuestData & { error?: string } = await res.json();
         if (data.error) throw new Error(data.error);
         setGuestData(data);
-      } catch (e: any) { setError(`Could not load invitation details: ${e.message}`); }
+      } catch (e: unknown) { setError(`Could not load invitation details: ${e instanceof Error ? e.message : String(e)}`); }
       finally { setLoading(false); }
     })();
   }, [guestParam]);
@@ -63,8 +63,8 @@ export function RsvpClientLogic({}: RsvpClientLogicProps) {
           ? `Thank you, ${guestData.name}! We're delighted you'll be celebrating with us. Your ${guestData.headCount} seat(s) are confirmed.`
           : `Thank you for letting us know, ${guestData.name}. You'll be missed!`
       );
-    } catch (e: any) {
-      setError(`RSVP submission failed: ${e.message}. Please try again.`);
+    } catch (e: unknown) {
+      setError(`RSVP submission failed: ${e instanceof Error ? e.message : String(e)}. Please try again.`);
     } finally {
       setSubmitting(false);
     }

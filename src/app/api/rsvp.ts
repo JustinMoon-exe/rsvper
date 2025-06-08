@@ -23,8 +23,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const data = await response.json();
     // Mirror status code and JSON back to front-end
     res.status(response.status).json(data);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error proxying to Apps Script:', err);
-    res.status(500).json({ status: 'error', message: err.message });
+    res.status(500).json({ status: 'error', message: err instanceof Error ? err.message : String(err) });
   }
 }
