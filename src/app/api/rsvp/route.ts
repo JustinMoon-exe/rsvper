@@ -1,7 +1,7 @@
 // src/app/api/rsvp/route.ts
 import { NextResponse } from 'next/server';
 
-const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL!;
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsJ0_04Pc8H48foxBve87kcC1Pdd4FiKB1s98RikdzpYenJ1Ua4C2jxM_f3fcSdgh8Aw/exec";
 if (!APPS_SCRIPT_URL) {
   throw new Error('Missing NEXT_PUBLIC_APPS_SCRIPT_URL env var');
 }

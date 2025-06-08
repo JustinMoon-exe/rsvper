@@ -19,7 +19,7 @@ export function RsvpClientLogic({}: RsvpClientLogicProps) {
   const [userChoice, setUserChoice] = useState<'Yes' | 'No' | null>(null);
 
   useEffect(() => {
-    const appsScriptUrl = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL;
+    const appsScriptUrl = "https://script.google.com/macros/s/AKfycbxsJ0_04Pc8H48foxBve87kcC1Pdd4FiKB1s98RikdzpYenJ1Ua4C2jxM_f3fcSdgh8Aw/exec";
     if (!appsScriptUrl) { setError("CRITICAL: API URL error."); setLoading(false); return; }
     if (!guestParam) { setError('No guest specified in link.'); setLoading(false); return; }
     
@@ -128,7 +128,7 @@ export function RsvpClientLogic({}: RsvpClientLogicProps) {
             {/* Button Container - Using flex and gap for spacing */}
             <motion.div 
               variants={itemVariants} 
-              className="flex flex-col sm:flex-row items-stretch justify-center gap-3 sm:gap-x-4 pt-3" // gap-x for horizontal space
+              className="rsvp-button-container"
             >
               {/* Accept Button (Subtle Style) */}
               <button

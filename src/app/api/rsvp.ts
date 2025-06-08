@@ -1,7 +1,7 @@
 // src/pages/api/rsvp.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQc2vinNAFh0QMQc0lq8Ux2rPQpDk0akKnlT-mFkjtJCBenbS9Hl6NPK_YhW64byz5Vw/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsJ0_04Pc8H48foxBve87kcC1Pdd4FiKB1s98RikdzpYenJ1Ua4C2jxM_f3fcSdgh8Aw/exec";
 // put your Apps Script URL in a .env.local: 
 //    ==APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbwQc2vinNAFh0QMQc0lq8Ux2rPQpDk0akKnlT-mFkjtJCBenbS9Hl6NPK_YhW64byz5Vw/exec
 
