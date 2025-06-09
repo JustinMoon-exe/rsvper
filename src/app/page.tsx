@@ -36,6 +36,9 @@ export default function RsvpPageContainer() {
   const rsvpBoxOpacity = useTransform(scrollY, [viewportHeight / 2, viewportHeight], [0, 1], { clamp: true });
   const rsvpBoxY = useTransform(scrollY, [viewportHeight / 2, viewportHeight], [50, 0], { clamp: true });
 
+  // Scroll indicator opacity
+  const scrollIndicatorOpacity = useTransform(scrollY, [0, viewportHeight / 2], [1, 0], { clamp: true });
+
   // Update the filter values on scroll for the image
   useEffect(() => {
     const unsubscribe = scrollY.on("change", () => {
@@ -65,6 +68,14 @@ export default function RsvpPageContainer() {
               priority
               sizes="(max-width: 800px) 90vw, 800px"
             />
+          </motion.div>
+          {/* Scroll Indicator */}
+          <motion.div
+            className="scroll-indicator"
+            style={{ opacity: scrollIndicatorOpacity }}
+          >
+            <span className="scroll-indicator-text">Scroll to RSVP</span>
+            <div className="scroll-indicator-arrow" />
           </motion.div>
         </div>
 

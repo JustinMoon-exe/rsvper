@@ -6,7 +6,7 @@
 :root {
   /* Light Mode */
   --color-page-bg: #faf9f7;        
-  --color-text-main: #3a2321;       
+  --color-text-main: #af6660;       
   --color-text-secondary: #5a4d45; 
   --color-text-accent: #9b7d5c;     
   
@@ -24,7 +24,7 @@
   --color-card-bg: #ffffff; 
 
   --color-bg: #2d1a1a; /* Much darker background */
-  --color-primary: #8d4152;
+  --color-primary: #da637c;
   --color-secondary: #e7c6c2;
   --color-accent: #bfa16a;
   --color-text-light: #fff8f5;
@@ -39,10 +39,10 @@
     --color-text-accent: #c8aa80;
     --color-button-bg: #c8aa80;      
     --color-button-text: #1a1614;     
-    --color-button-hover-bg: #b89a70; 
-    --color-button-secondary-bg: rgba(200, 170, 128, 0.15); 
+    --color-button-hover-bg: #fde9cd; 
+    --color-button-secondary-bg: rgb(177, 131, 127); 
     --color-button-secondary-text: var(--color-text-main);   
-    --color-button-secondary-hover-bg: rgba(200, 170, 128, 0.25);
+    --color-button-secondary-hover-bg: rgb(255, 203, 203);
     --color-form-bg: rgba(26, 22, 20, 0.95);
     --color-text-on-glass: var(--color-text-main);
   }
@@ -122,6 +122,7 @@ body {
   z-index: 9999;
   width: 90vw;
   max-width: 600px;
+  min-width: 0;
   background: rgba(30, 20, 20, 0.55);
   color: #fff;
   padding: 2.5rem 2rem;
@@ -131,6 +132,16 @@ body {
   font-family: var(--font-gayathri), sans-serif;
   font-weight: 400;
   font-size: 1.25rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .glass-form-box {
+    width: calc(100vw - 2rem);
+    padding: 1.5rem 1rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .kindly-respond-heading {
@@ -261,38 +272,42 @@ button, .rsvp-btn, .rsvp-button-base {
   left: 0;
   right: 0;
   bottom: 0;
-  border: 1px solid rgba(155, 125, 92, 0.2);
+  /* border: 1px solid rgba(155, 125, 92, 0.2); */
   border-radius: 1rem;
   pointer-events: none;
+  display: none;
 }
 
 /* --- Scroll Indicator --- */
 .scroll-indicator {
   position: fixed;
-  bottom: 2rem;
+  bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  color: var(--color-text-secondary);
-  opacity: 0.8;
+  color: #fff;
+  opacity: 0.9;
   pointer-events: none;
-  z-index: 10;
+  z-index: 100;
 }
 
 .scroll-indicator-text {
-  font-size: 0.875rem;
+  font-size: 1.1rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  font-family: var(--font-gayathri), sans-serif;
+  font-weight: 400;
+  color: #fff;
   animation: fadeInOut 2s ease-in-out infinite;
 }
 
 .scroll-indicator-arrow {
   width: 2px;
-  height: 40px;
-  background: currentColor;
+  height: 36px;
+  background: #fff;
   border-radius: 2px;
   position: relative;
   animation: scrollDown 2s ease-in-out infinite;
@@ -303,24 +318,23 @@ button, .rsvp-btn, .rsvp-button-base {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
   transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
   animation: fadeInOut 2s ease-in-out infinite;
 }
 
 @keyframes fadeInOut {
   0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+  50% { opacity: 0.9; }
 }
 
 @keyframes scrollDown {
   0% { transform: translateY(0); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(18px); opacity: 0; }
 }
 
 body, html {
