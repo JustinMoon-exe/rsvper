@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Gayathri } from 'next/font/google';
+import { Analytics } from "@vercel/analytics/next"
 import './globals.css';
 
 const gayathri = Gayathri({
