@@ -23,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${gayathri.variable} font-gayathri`}>
       <head />
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
